@@ -1,0 +1,6 @@
+hinh1: httpswww.analyticsvidhya.comblog202204innovative-applications-of-machine-learning-in-healthcare-domain
+hinh2: tu ve
+hinh3: https://victorzhou.com/blog/intro-to-neural-networks/
+hinh4: https://www.gatevidyalay.com/linear-regression-machine-learning-examples/
+hinh5: https://www.javatpoint.com/k-means-clustering-algorithm-in-machine-learning
+hinhxx: https://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification
