@@ -11,40 +11,32 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn import metrics
 import pickle
 from Create_Dataset import create_data_set
-# loại bỏ các stopwords
+
 stop_words = set(stopwords.words('english'))
 stop_words.add('said')
 stop_words.add('mr')
 
-# tạo hàm để đọc dữ liệu từ file data.txt biến đổi thành danh sách dữ liệu gồm nhãn
 def setup_docs():
-    docs = [] # (label, text) Khởi tạo một danh sách rỗng để chứa các bộ dữ liệu
+    docs = []
     with open('data.txt', 'r', encoding='utf8') as datafile:
         for row in datafile:
-            parts = row.split('\t') # Tách mỗi dòng thành các phần bằng cách sử dụng dấu tab ('\t') làm dấu phân cách
-            doc = ( parts[0], parts[2].strip() ) # Tạo một bộ dữ liệu mới, trong đó phần tử đầu tiên là nhãn, và phần tử thứ hai là văn bản 
-            docs.append(doc) # Thêm bộ dữ liệu mới vào danh sách docs
-        return docs # Trả về danh sách docs 
+            parts = row.split('\t') 
+            doc = ( parts[0], parts[2].strip() ) 
+            docs.append(doc) 
+        return docs 
 
-# làm sạch văn bản đầu vào 
 def clean_text(text):
-    # loại bỏ dấu câu bằng cách thay dấu câu bằng khoảng trắng
     text = text.translate(str.maketrans('', '', string.punctuation))
-    # chuyển đổi văn bản thành chữ thường
     text = text.lower()
     return text
 
-# loại bỏ stopword cho văn bản
 def get_tokens(text):
-    # tách từ
     tokens = word_tokenize(text)
-    # lọc từ đã tách và loại bỏ stopword
     tokens = [t for t in tokens if not t in stop_words]
     return tokens
 
 def print_frequency_dist(docs):
     tokens = defaultdict(list)
-    # tạo một danh sách khổng lồ gồm tất cả các từ cho mỗi danh mục
     for doc in docs:
         doc_label = doc[0]
         #doc_text = doc[1] sau khi đã tìm ra các từ xuất hiện nhiều nhất, đến bước clean text #1
@@ -57,15 +49,12 @@ def print_frequency_dist(docs):
         fd = FreqDist(category_tokens)
         print(fd.most_common(20))
 
-# chia tập dữ liệu thành tập huấn luyện và tập kiểm tra
 def get_splits(docs):
-    # trộn dữ liệu trong danh sách docs đảm bảo tính ngẫu nhiên
     random.shuffle(docs)
-    # Khởi tạo các danh sách rỗng để lưu trữ các bộ dữ liệu huấn luyện và kiểm tra cùng với nhãn tương ứng
-    X_train = []# training documents
-    y_train = []# corresponding training labels
-    X_test = []# test documents
-    y_test = []# corresponding test labels
+    X_train = []
+    y_train = []
+    X_test = []
+    y_test = []
     pivot = int(.80 * len(docs)) # tính đoán index của điểm chia tách giữa tập huấn luyện và tập kiểm tra (80% train và 20% test)
     for i in range(0, pivot):
         X_train.append(docs[i][1]) # Lặp qua các bộ dữ liệu từ đầu đến điểm chia tách (80%), thêm dữ liệu và nhãn tương ứng vào tập huấn luyện
