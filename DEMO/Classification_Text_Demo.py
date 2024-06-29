@@ -134,11 +134,11 @@ if __name__ == '__main__':
     
     #train_classifier(docs)
     
-    new_doc = """Enzo Maresca set to succeed Mauricio Pochettino
-    as Chelsea head coach; 44-year-old Italian 
-    is leaving Leicester after leading them to promotion to the
-    Premier League by winning the Championship; Maresca preferred 
-    to Thomas Frank, Roberto De Zerbi and Kieran McKenna for the job"""
+    new_doc = """We are continuing to work closely with German police to support a safe and trouble-free Euro 2024 tournament for travelling England fans.”
+
+Up 40,000 England fans and 8,000 Serbia fans are expected to travel to Gelsenkirchen for a game UEFA, European football’s governing body, and German police have designated as “high-risk.”
+
+In total, some 300,000 England fans are expected to travel to Germany during the tournament. CNN understands the British police have around 2,000 banning orders currently in place for fans."""
     
     classify(new_doc)
     
